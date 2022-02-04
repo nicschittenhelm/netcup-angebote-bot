@@ -24,7 +24,7 @@ def check_update(items_new):
     guid_sum = str()
     for item in items_new:
         guid_sum += get_guid_id(item)
-    
+
     new_hash = hashlib.sha224(guid_sum.encode('utf-8')).hexdigest()
 
     if new_hash == current_hash:
@@ -41,21 +41,22 @@ def whats_new(items_new):
     global items_old
     difference = list(set(items_old).symmetric_difference(set(items_new)))
     print("differenz: " + str(len(difference)))
-    print("alt: " + str(len(difference)))
+    print("alt: " + str(len(items_old)))
     print(" ")
 
     items_old = items_new
 
     print("differenz: " + str(len(difference)))
-    print("alt: " + str(len(difference)))
+    print("alt: " + str(len(items_old)))
     print(" ")
 
+    #checks if item got removed 
     for item in difference:
         if item in items_old:
             items_old.remove(item)
     
     print("differenz: " + str(len(difference)))
-    print("alt: " + str(len(difference)))
+    print("alt: " + str(len(items_old)))
     print(" ")
 
 
