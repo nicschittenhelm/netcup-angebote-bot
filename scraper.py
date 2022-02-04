@@ -1,33 +1,37 @@
-from doctest import DebugRunner
-from tabnanny import check
 import requests
 from bs4 import BeautifulSoup
-
-url = f'http://127.0.0.1:5500/netcup%20Sonderangebote.html'
-
-page = requests.get(url)
-soup = BeautifulSoup(page.content, 'html.parser')
-cards = soup.find_all('div', {'class':'card'})
-available_cards = []
-unavailable_class = 'card--unavailable'
-
-def remove_unavailable (cards):
-    for card in cards:
-
-        unavailable = str(card).find(unavailable_class)
-        if unavailable == -1:
-            available_cards.append(card)
-
-remove_unavailable(cards)   
+import hashlib
 
 
+url = 'http://127.0.0.1:5500/feed.xml' #'https://www.netcup-sonderangebote.de/feed/'
+feed = requests.get(url)
+soup_feed = BeautifulSoup(feed.content, 'xml')
 
-title_div = available_cards[0].find('div', {'class':'card--content--title'})
+items = soup_feed.find_all('item')
 
-for span in title_div.findAll('span'):
-    span.replace_with('')
+# returns the guid id of passed item
+def get_guid_id(tag):
+    guid = tag.find('guid').text
+    id = guid.split('=')[-1]
+    return id
 
-title = title_div.text
+# returns true or false if content has updated.
+# compares old and new hash by hashing all guid id's
+current_hash = str()
+def check_update(items):
+    global current_hash
+    guid_sum = str()
+    for item in items:
+        guid_sum += get_guid_id(item)
+    
+    new_hash = hashlib.sha224(guid_sum.encode('utf-8')).hexdigest()
 
+    if new_hash == current_hash:
+        return False
+    
+    current_hash = new_hash
+    return True
 
-print(title)
+print(current_hash)
+print(check_update(items))
+print(current_hash)
