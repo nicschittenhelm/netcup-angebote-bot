@@ -34,8 +34,7 @@ update = '''
         </item>
         <item>
             <title>VPS 2</title>
-        </item>
-
+        </item>        
         '''
 
 soup_new = BeautifulSoup(new, 'html.parser')
@@ -50,10 +49,11 @@ def whats_new(items_new):
     global items_old
     final = BeautifulSoup()
 
-    # print('old input: ',items_old)
-    # print('================================')
-    # print('new input: ',items_new)
-    # print('================================')
+    # for debugging
+    print('old input: ',items_old)
+    print('================================')
+    print('new input: ',items_new)
+    print('================================')
 
     for new_item in items_new:
         if new_item not in items_old:
@@ -63,22 +63,9 @@ def whats_new(items_new):
 
     print('final: ',final)
     print('================================')
-    print(' ')
 
 
 
 whats_new(items_new)
 items_new = items_update
 whats_new(items_new)
-
-
-#whats_new(items_new)
-#items_new = items_update
-#whats_new(items_new)
-
-# to fix
-
-# when adding an item while removing an item
-# at the same time, result also retuns removed item
-# 
-# find solution to remove old content from overflow

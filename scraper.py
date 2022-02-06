@@ -16,6 +16,7 @@ def get_guid_id(tag):
     id = guid.split('=')[-1]
     return id
 
+
 # returns true or false if content has updated.
 # compares old and new hash by hashing all guid id's
 current_hash = str()
@@ -33,31 +34,16 @@ def check_update(items_new):
     current_hash = new_hash
     return True
 
-#print(current_hash)
-#print(check_update(items_new))
-#print(current_hash)
-
+# returns items that got added this iteration
 def whats_new(items_new):
     global items_old
-    difference = list(set(items_old).symmetric_difference(set(items_new)))
-    print("differenz: " + str(len(difference)))
-    print("alt: " + str(len(items_old)))
-    print(" ")
+    final = BeautifulSoup()
 
-    items_old = items_new
-
-    print("differenz: " + str(len(difference)))
-    print("alt: " + str(len(items_old)))
-    print(" ")
-
-    #checks if item got removed 
-    for item in difference:
-        if item in items_old:
-            items_old.remove(item)
+    for new_item in items_new:
+        if new_item not in items_old:
+            final.append(new_item)
     
-    print("differenz: " + str(len(difference)))
-    print("alt: " + str(len(items_old)))
-    print(" ")
+    items_old = items_new
+    print('final: ',final)
+    return final
 
-
-whats_new(items_new)
