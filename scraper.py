@@ -1,17 +1,24 @@
+import imp
 import requests
 from bs4 import BeautifulSoup
 import hashlib
-
+from bot import embed
 
 url = 'https://snerts.de/' #'https://www.netcup-sonderangebote.de/feed/'
-feed = requests.get(url)
-soup_feed = BeautifulSoup(feed.content, 'xml')
-items_new = soup_feed.find_all('item')
 items_old = BeautifulSoup()
+
+def update():
+
+    feed = requests.get(url)
+    soup_feed = BeautifulSoup(feed.content, 'xml')
+    items_new = soup_feed.find_all('item')
+
+    check_update(items_new)
+
+
 
 # returns the guid id of passed item
 def get_guid_id(tag):
-    update_data()
     guid = tag.find('guid').text
     id = guid.split('=')[-1]
     return id
@@ -27,16 +34,18 @@ def check_update(items_new):
 
     new_hash = hashlib.sha224(guid_sum.encode('utf-8')).hexdigest()
 
-    print('Alter Hash: ', current_hash)
-    current_hash = new_hash
-    print('Neuer Hash: ', current_hash)
-
     if new_hash == current_hash:
-        return False
+        print('No Updates')
+    else:
+        current_hash = new_hash
+        # what to happen when update got detected
+        build_message(whats_new(items_new))
 
+def build_message(items_output):
+    for item in items_output:
+        embed('test','test','test','test')
 
-    return True
-
+    
 # returns items that got added this iteration
 def whats_new(items_new):
     global items_old
@@ -47,6 +56,5 @@ def whats_new(items_new):
             final.append(new_item)
     
     items_old = items_new
-    print('final: ',final)
     return final
 
