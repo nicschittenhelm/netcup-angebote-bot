@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import bs4
 import hashlib
-import lxml
+import re
 
 # stores hash of previous iteration
 current_hash = str()
@@ -58,21 +58,21 @@ class RunScraper:
 
 
     def build_data(self, tag):
-        
+
         data_item = {}
         data_item['title'] = tag.title.get_text()
         data_item['type'] = tag.category.get_text()
         data_item['price'] = self.get_price(tag.find('content:encoded'))
         data_item['link'] = tag.guid.get_text()
 
+
         return data_item
 
-    # creates new soup using 
+    # extracts data from CDATA and puts it in new soup
+    # replaces 'EUR' with '€' to avoid returning 'None' due to inconsistent naming
+    # finds price using regex
     def get_price(self, tag):
-        CDATA = BeautifulSoup(tag.find(text=lambda tag: isinstance(tag, bs4.CData)).text, 'html.parser')
-        temp = BeautifulSoup(str(CDATA.find_all('p')[1::2][0].find('strong')), 'html.parser')
-        return temp.get_text().strip()
+        CDATA = BeautifulSoup(tag.find(text=lambda tag: isinstance(tag, bs4.CData)).text.replace('EUR', '€'), 'html.parser')
+        content = str(CDATA.find(string=re.compile('€')))
 
-        
-
-        
+        return content

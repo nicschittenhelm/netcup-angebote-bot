@@ -9,6 +9,7 @@ channel_id = 938856334412095499
 @client.event
 async def on_ready():
     print(client.user.name)
+    await client.get_channel(channel_id).send('Bot beigetreten!')
 
 @client.command
 async def here(ctx):
@@ -26,7 +27,7 @@ async def loop():
         print('NEUES ANGEBOT')
         for item in Scraper.whats_new():
             data = Scraper.build_data(item)
-            #print(data)
+            print(data)
             embed = discord.Embed(title = data['title'], description = data['type'])
             embed.add_field(name = data['price'], value = '[Direkt zum Angebot](%s)' % data['link'])
             embed.set_thumbnail(url = 'https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/fd/fe/bc/fdfebc9b-e1f8-732d-faad-c0fc2a608bf7/source/512x512bb.jpg')
