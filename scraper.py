@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import bs4
 import hashlib
 import lxml
 
@@ -13,7 +14,7 @@ class RunScraper:
     def __init__(self):
         self.url = 'https://snerts.de/' #'https://www.netcup-sonderangebote.de/feed/'
         self.feed = requests.get(self.url)
-        self.soup_feed = BeautifulSoup(self.feed.content, 'lxml')
+        self.soup_feed = BeautifulSoup(self.feed.content, 'html.parser')
         self.items_new = self.soup_feed.find_all('item')
 
     def __del__(self):
@@ -57,13 +58,21 @@ class RunScraper:
 
 
     def build_data(self, tag):
+        
         data_item = {}
         data_item['title'] = tag.title.get_text()
         data_item['type'] = tag.category.get_text()
-        data_item['price'] = tag.encoded#self.get_price(tag.find('encoded'))
+        data_item['price'] = self.get_price(tag.find('content:encoded'))
+        data_item['link'] = tag.guid.get_text()
 
         return data_item
 
+    # creates new soup using 
+    def get_price(self, tag):
+        CDATA = BeautifulSoup(tag.find(text=lambda tag: isinstance(tag, bs4.CData)).text, 'html.parser')
+        temp = BeautifulSoup(str(CDATA.find_all('p')[1::2][0].find('strong')), 'html.parser')
+        return temp.get_text().strip()
 
-    # def get_price(self, tag):
-    #     return tag#.find_all('strong')
+        
+
+        
