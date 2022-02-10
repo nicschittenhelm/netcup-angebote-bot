@@ -58,13 +58,11 @@ class RunScraper:
 
 
     def build_data(self, tag):
-
         data_item = {}
         data_item['title'] = tag.title.get_text()
         data_item['type'] = tag.category.get_text()
         data_item['price'] = self.get_price(tag.find('content:encoded'))
         data_item['link'] = tag.guid.get_text()
-
 
         return data_item
 
