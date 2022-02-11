@@ -24,13 +24,46 @@ async def netcup(ctx, *args):
                 color = discord.Color.from_rgb(4,100,116)
                 )
             embed.add_field(name = '\u200B', value ='\u200B', inline = False)
-            embed.add_field(name = '!netcup here', value = 'Legt Channel fest in welchem Angebote gepostet werden', inline = True)
+            embed.add_field(name = '!netcup hier', value = 'Legt Channel fest in welchem Angebote gepostet werden', inline = True)
             embed.add_field(name = '!netcup intervall', value = 'Legt den Intervall fest in welchem nach Updates gesucht wird. (Standardwert ist 15 Minuten)', inline = True)
             embed.add_field(name = '\u200B', value ='\u200B', inline = False)
             embed.set_footer(text = 'https://github.com/ebrofi/netcup-angebote-bot', icon_url = 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png')
             await ctx.send(embed=embed)
 
-    if args[0] == 'here':
+    if args[0] == 'gutscheine':
+        embed = discord.Embed(
+            title = 'Gutscheine',
+            description = 'Codes können [hier](https://www.netcup.de/bestellen/gutschein_einloesen.php) eingelöst werden. Hierbei handelt es sich um Gutscheine aus dem Netcup Partnerprogramm und unterstützen den Entwickler',
+            color = discord.Color.from_rgb(4,100,116)
+            )
+        embed.add_field(name = '5€ Gutschein (für Neukunden, keine Domains)', value = '36nc16446083830', inline = True)
+        embed.add_field(name = 'Webhosting 2000 30% Rabatt', value = '1927nc16446083870	', inline = True)
+        embed.add_field(name = 'Webhosting 4000 30% Rabatt', value = '1928nc16446083930	', inline = True)
+        embed.add_field(name = 'Webhosting 8000 30% Rabatt', value = '1929nc16446083950	', inline = True)
+        embed.add_field(name = 'VPS 200 G8 10% Rabatt', value = '2052nc16446083970', inline = True)
+        embed.add_field(name = 'VPS 500 G8 10% Rabatt', value = '2053nc16446084000	', inline = True)
+        embed.add_field(name = 'VPS 1000 G8 10% Rabatt', value = '2054nc16446084030	', inline = True)
+        embed.add_field(name = 'VPS 2000 G8 10% Rabatt', value = '2056nc16446084060', inline = True)
+        embed.add_field(name = 'RS 1000 SSD G7SE 30% Rabatt', value = '2057nc16446084080', inline = True)
+        embed.add_field(name = 'RS 1000 SAS G8 30% Rabatt', value = '2201nc16446084110', inline = True)
+        embed.add_field(name = 'RS 1000 SSD G8 30% Rabatt', value = '2202nc16446084130', inline = True)
+        embed.add_field(name = 'Webhosting 2000 SE 30% Rabatt', value = '2234nc16446084160', inline = True)
+        embed.add_field(name = 'Webhosting 4000 SE 30% Rabatt', value = '2235nc16446084180', inline = True)
+        embed.add_field(name = 'Webhosting 8000 SE 30% Rabatt', value = '2236nc16446084210', inline = True)
+        embed.add_field(name = 'VPS 1000 G9 1M Rabatt', value = '2609nc16446084240', inline = True)
+        embed.add_field(name = 'VPS 2000 G9 1M Rabatt', value = '2610nc16446084260', inline = True)
+        embed.add_field(name = 'VPS 3000 G9 1M Rabatt', value = '2611nc16446084290', inline = True)
+        embed.add_field(name = 'VPS 4000 G9 1M Rabatt', value = '2612nc16446084310', inline = True)
+        embed.add_field(name = 'VPS 6000 G9 1M Rabatt', value = '2613nc16446084340', inline = True)
+        embed.add_field(name = 'VPS 8000 G9 1M Rabatt', value = '2614nc16446084390', inline = True)
+        embed.add_field(name = 'RS 1000 G9 3M Rabatt', value = '2716nc16446084430', inline = True)
+        embed.add_field(name = 'RS 2000 G9 3M Rabatt', value = '2717nc16446084460', inline = True)
+        embed.add_field(name = 'RS 4000 G9 2M Rabatt', value = '2718nc16446084490', inline = True)
+        embed.add_field(name = 'RS 8000 G9 1M Rabatt', value = '2719nc16446084540', inline = True)
+        embed.set_footer(text = 'https://github.com/ebrofi/netcup-angebote-bot', icon_url = 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png')
+        await ctx.send(embed=embed)
+
+    if args[0] == 'hier':
         channel_id = ctx.channel.id
         await ctx.send('Updates werden ab jetzt hier gepostet.')
     
