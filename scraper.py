@@ -12,7 +12,7 @@ items_old = BeautifulSoup()
 class RunScraper:
 
     def __init__(self):
-        self.url = 'https://snerts.de/' #'https://www.netcup-sonderangebote.de/feed/'
+        self.url = 'https://www.netcup-sonderangebote.de/feed/' #'https://www.netcup-sonderangebote.de/feed/'
         self.feed = requests.get(self.url)
         self.soup_feed = BeautifulSoup(self.feed.content, 'html.parser')
         self.items_new = self.soup_feed.find_all('item')
