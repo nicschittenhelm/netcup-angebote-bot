@@ -26,6 +26,7 @@ async def netcup(ctx, *args):
             embed.add_field(name = '\u200B', value ='\u200B', inline = False)
             embed.add_field(name = '!netcup hier', value = 'Legt Channel fest in welchem Angebote gepostet werden', inline = True)
             embed.add_field(name = '!netcup intervall', value = 'Legt den Intervall fest in welchem nach Updates gesucht wird. (Standardwert ist 15 Minuten)', inline = True)
+            embed.add_field(name = '!netcup gutscheine', value = 'Zeigt Liste aktueller Rabattgutscheine aus dem Netcup Partnerprogramm', inline = True)
             embed.add_field(name = '\u200B', value ='\u200B', inline = False)
             embed.set_footer(text = 'https://github.com/ebrofi/netcup-angebote-bot', icon_url = 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png')
             await ctx.send(embed=embed)
