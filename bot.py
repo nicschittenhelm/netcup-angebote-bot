@@ -71,7 +71,7 @@ async def netcup(ctx, *args):
         loop.change_interval(minutes=float(args[1]))
         await ctx.send('Der Updateintervall wurde auf %s Minuten gesetzt' % args[1])
 
-@tasks.loop(minutes=1)
+@tasks.loop(minutes=15)
 async def loop():
     global first_start
     await bot.wait_until_ready()
