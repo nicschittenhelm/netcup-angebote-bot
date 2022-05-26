@@ -4,10 +4,10 @@ This is a quick and dirty implementation of a Discord bot posting the latest spe
 
 ## Commands
 
-- **!netcup help** Lists available commands.
-- **!netcup hier** Tells the bot in which channel to post notifications.
-- **!netcup intervall [minutes]** Lets you change the interval the bot checks for updates. (default is 15min)
-- **!netcup gutscheine** Lists all available codes from the netcup affiliate program.
+- `netcup help` Lists available commands.
+- `!netcup hier` Tells the bot in which channel to post notifications.
+- `!netcup intervall [minutes]` Lets you change the interval the bot checks for updates. (default is 15min)
+- `!netcup gutscheine` Lists all available codes from the netcup affiliate program.
 
 ## Setup
 
